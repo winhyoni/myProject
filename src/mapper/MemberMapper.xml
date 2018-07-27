@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mabatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.MemberMapper">
+	<select id="select" resultType="Member" parameterType="map">
+		select * from member 
+		<if test="column != null and find != null">
+			where ${column} like '%${find}%'
+		</if>
+		order by rank
+		<if test="startrow != null and limit != null">
+			limit ${startrow},${limit}
+		</if>
+	</select>
+	
+	<select id="select2" resultType="Member" parameterType="map">
+		select * from member where dpt='${dpt}'
+		<if test="column != null and find != null">
+			and ${column} like '%${find}%'
+		</if>
+		order by rank
+		<if test="startrow != null and limit != null">
+			limit ${startrow},${limit}
+		</if>
+	</select>
+	
+	<select id="memberCount" resultType="int" parameterType="map">
+	select count(*) from member
+	<if test="column != null and find != null">
+		where ${column} like '%${find}%'
+	</if>
+	</select>
+	
+	<select id="teammemberCount" resultType="int" parameterType="map">
+	select count(*) from member where dpt='${dpt}'
+	<if test="column != null and find != null">
+		and ${column} like '%${find}%'
+	</if>
+	</select>
+	
+	
+</mapper>

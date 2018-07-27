@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+
+<decorators defaultdir="/decorator">
+  <decorator name="main" 
+    page="/model2/decorator.jsp">
+  	<pattern>/model2/member/*</pattern>
+  	<pattern>/model2/board/*</pattern>
+  	<pattern>/model2/calender/*</pattern>
+  	<pattern>/model2/message/*</pattern>
+  </decorator>
+  <decorator name="login"
+    page="/model2/logindecorator.jsp">
+  	<pattern>/model2/loginchange/*</pattern>
+  </decorator>
+  
+  <!-- layout 설정을 제외 함. -->
+  <excludes>
+    <pattern>/model2/member/memberimg*</pattern>
+  </excludes>
+</decorators>

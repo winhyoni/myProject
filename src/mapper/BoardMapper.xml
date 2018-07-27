@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mabatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BoardMapper">
+	<select id="boardCount" resultType="int" parameterType="map">
+	select count(*) from board where kindno=${kindno}
+	<if test="column != null and find != null">
+		and ${column} like '%${find}%'
+	</if>
+	</select>
+	
+	<select id="boardlist" resultType="Board" parameterType="map">
+		select * from board where kindno=${kindno}
+		<if test="column != null and find != null">
+			and ${column} like '%${find}%'
+		</if>
+		order by no desc
+		<if test="startrow != null and limit != null">
+			limit ${startrow},${limit}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mabatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.MessageMapper">
+	<select id="sendmessageCount" resultType="int" parameterType="map">
+	select count(*) from message where sendmem = ${memberno} and senddelete=0
+	<if test="column != null and find != null">
+		and ${column} like '%${find}%'
+	</if>
+	</select>
+	
+	<select id="receivemessageCount" resultType="int" parameterType="map">
+	select count(*) from message where receivemem=${memberno} and receivedelete=0
+	<if test="column != null and find != null">
+		and ${column} like '%${find}%'
+	</if>
+	</select>
+	
+	<select id="sendmessagelist" resultType="Message" parameterType="map">
+		select * from message where sendmem=${memberno} and senddelete=0
+		<if test="column != null and find != null">
+			and ${column} like '%${find}%'
+		</if>
+		order by no desc
+		<if test="startrow != null and limit != null">
+			limit ${startrow},${limit}
+		</if>
+	</select>
+	
+	<select id="receivemessagelist" resultType="Message" parameterType="map">
+		select * from message where receivemem=${memberno} and receivedelete=0
+		<if test="column != null and find != null">
+			and ${column} like '%${find}%'
+		</if>
+		order by no desc
+		<if test="startrow != null and limit != null">
+			limit ${startrow},${limit}
+		</if>
+	</select>
+</mapper>
